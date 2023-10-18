@@ -5,16 +5,15 @@ const songSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  artist: {
+  img_src: {
     type: String,
     required: true,
   },
   album: String,
-  audioUrl: {
+  src: {
     type: String,
     required: true,
-  },
-  imageUrl: String, // Cloudinary URL for album cover image
+  }
 });
 
 const Song = mongoose.model('Song', songSchema);

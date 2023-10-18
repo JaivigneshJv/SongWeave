@@ -1,10 +1,10 @@
 .App {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
+  justify-content: left;
+  align-items: left;
+  justify-items: left;
   height: 100vh;
 }
 

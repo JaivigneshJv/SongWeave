@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./player.css";
 
-
 import Details from "./Details";
 import Controls from "./Controls";
 
@@ -46,7 +45,7 @@ const Player = (props) => {
 
   return (
     <div className="player_container">
-      <h1> Now Playing </h1>
+      <h1> Player </h1>
       <Details song={props.songs[props.currentSongIndex]} />
       <Controls
         isPlaying={isPlaying}
@@ -58,6 +57,7 @@ const Player = (props) => {
         src={props.songs[props.currentSongIndex].src}
         ref={audioEl}
         controls
+        controlsList="nodownload "
       ></audio>
 
       <p>
