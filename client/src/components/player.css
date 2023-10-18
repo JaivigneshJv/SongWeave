@@ -1,4 +1,428 @@
-.player_container {
+@media only screen and (max-width: 600px) {
+  .player_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 1px solid white;
+    height: 99vh;
+    width: 99vw;
+  }
+  .player_container h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: poppins;
+  }
+  .details {
+    font-size: x-large;
+  }
+  .controls {
+    width: 400px;
+    height: 50px;
+  }
+  .player__button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .player__img{
+    width: 200px;
+    height: 200px;
+  }
+  .right_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 0.5px solid white;
+    height: 99vh;
+    width: 99vw;
+  }
+  .songs_container{
+    text-align: left;
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+    margin: 100px
+  }
+  .upload_container{
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 100px;
+  }
+  
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  form label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="file"] {
+    margin-bottom: 20px;
+  }
+  
+  form button[type="submit"] {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  audio::-webkit-media-controls-play-button {
+    display: none;
+  }
+  
+  audio::-webkit-media-controls-pause-button {
+    display: none;
+  }
+  
+  audio{
+    background-color: black;
+  }
+  
+  .song_info{
+    font-size: small;
+  }
+  
+}
+
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .player_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 1px solid white;
+    height: 99vh;
+    width: 99vw;
+  }
+  .player_container h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: poppins;
+  }
+  .details {
+    font-size: x-large;
+  }
+  .controls {
+    width: 400px;
+    height: 50px;
+  }
+  .player__button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .player__img{
+    width: 200px;
+    height: 200px;
+  }
+  .right_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 0.5px solid white;
+    height: 99vh;
+    width: 99vw;
+  }
+  .songs_container{
+    text-align: left;
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+  }
+  .upload_container{
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 100px;
+  }
+  
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  form label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="file"] {
+    margin-bottom: 20px;
+  }
+  
+  form button[type="submit"] {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  audio::-webkit-media-controls-play-button {
+    display: none;
+  }
+  
+  audio::-webkit-media-controls-pause-button {
+    display: none;
+  }
+  
+  audio{
+    background-color: black;
+  }
+  
+  .song_info{
+    font-size: small;
+  }
+  
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .player_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 1px solid white;
+    height: 99vh;
+    width: 40vw;
+  }
+  .player_container h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: poppins;
+  }
+  .details {
+    font-size: x-large;
+  }
+  .controls {
+    width: 400px;
+    height: 50px;
+  }
+  .player__button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .player__img{
+    width: 200px;
+    height: 200px;
+  }
+  .right_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 0.5px solid white;
+    height: 99vh;
+    width: 70vw;
+  }
+  .songs_container{
+    text-align: left;
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+  }
+  .upload_container{
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 100px;
+  }
+  
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  form label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="file"] {
+    margin-bottom: 20px;
+  }
+  
+  form button[type="submit"] {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  audio::-webkit-media-controls-play-button {
+    display: none;
+  }
+  
+  audio::-webkit-media-controls-pause-button {
+    display: none;
+  }
+  
+  audio{
+    background-color: black;
+  }
+  
+  .song_info{
+    font-size: small;
+  }
+  
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .player_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 1px solid white;
+    height: 99vh;
+    width: 30vw;
+  }
+  .player_container h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: poppins;
+  }
+  .details {
+    font-size: x-large;
+  }
+  .controls {
+    width: 400px;
+    height: 50px;
+  }
+  .player__button {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  .player__img{
+    width: 200px;
+    height: 200px;
+  }
+  .right_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 0.5px solid white;
+    height: 99vh;
+    width: 70vw;
+  }
+  .songs_container{
+    text-align: left;
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+  }
+  .upload_container{
+    border: .5px solid white;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 100px;
+  }
+  
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  form label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  form input[type="file"] {
+    margin-bottom: 20px;
+  }
+  
+  form button[type="submit"] {
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  audio::-webkit-media-controls-play-button {
+    display: none;
+  }
+  
+  audio::-webkit-media-controls-pause-button {
+    display: none;
+  }
+  
+  audio{
+    background-color: black;
+  }
+  
+  .song_info{
+    font-size: small;
+  }
+  
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .player_container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,3 +519,8 @@ audio{
   background-color: black;
 }
 
+.song_info{
+  font-size: small;
+}
+
+}

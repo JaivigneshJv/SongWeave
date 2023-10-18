@@ -1,17 +1,19 @@
 import express from "express";
-import multer from "multer";
 import mongoose from "mongoose";
 import Song from "./models/Song.js";
 import { parseFile } from "music-metadata";
 import { inspect } from "util";
-import fs from "fs";
-import path from "path";
 import cors from "cors";
 import { v4 as uuidv4 } from 'uuid';
 
+//gidyai
+import multer from "multer";
+import path from "path";
+import fs from "fs";
+
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+//nodemon gidyai 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "/Users/Neko/Developer/MediaPlayerMERN/client/public/songs");
@@ -35,7 +37,7 @@ const upload = multer({
 
 app.use(cors());
 
-try {
+try { //gidyai
   mongoose.connect("mongodb://localhost:27017/songs", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -131,6 +133,6 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
 //     }
 //   })();
 
-app.listen(PORT, () => {
+app.listen(PORT, () => { //gidyai
   console.log(`Server is running on port ${PORT}`);
 });

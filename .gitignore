@@ -2,3 +2,5 @@
 .env
 **/node_modules**
 **.env**
+
+# gidyai docker and stuffs

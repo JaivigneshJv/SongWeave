@@ -59,6 +59,7 @@ const Player = (props) => {
         controls
         controlsList="nodownload "
       ></audio>
+      {/* gidyai - audio tag */}
 
       <p>
         Next Up : <span>{props.songs[props.nextSongIndex].title}</span>

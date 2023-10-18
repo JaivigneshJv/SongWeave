@@ -2,13 +2,14 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import Player from "./components/Player";
 import Right from "./components/Right";
+//gidyai - file structure
 import axios from "axios";
 
 
 
 function App() {
   const [songs, setSongs] = useState([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0); //gidyai - hooks
   const [nextSongIndex, setNextSongIndex] = useState(0);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function App() {
     <div className="App">
       {songs.length > 0 && (
         <Player
-          currentSongIndex={currentSongIndex}
+          currentSongIndex={currentSongIndex} //gidyai - props
           setCurrentSongIndex={setCurrentSongIndex}
           nextSongIndex={nextSongIndex}
           songs={songs}

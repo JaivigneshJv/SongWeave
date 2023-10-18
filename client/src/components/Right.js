@@ -25,6 +25,7 @@ function Right(props) {
           },
         }
       );
+      window.location.reload();
 
       console.log(response.data);
     } catch (err) {

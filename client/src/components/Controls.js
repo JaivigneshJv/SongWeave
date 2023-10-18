@@ -5,7 +5,8 @@ const Controls = (props) => {
   return (
     <div>
         <div className="controls">
-        <BiSkipPrevious className="player__button"  onClick={() => props.SkipSong(false)}/>
+        <BiSkipPrevious className="player__button"  onClick={() => props.SkipSong(false)}/> 
+        {/* gidyai - icons */}
         
         {props.isPlaying ? (<BiPause className="player__button" onClick={() => props.setIsPlaying(!props.isPlaying)}/>) : (<BiPlay className="player__button" onClick={() => props.setIsPlaying(!props.isPlaying)}/>)}
         <BiSkipNext className="player__button" onClick={() => props.SkipSong()} />
