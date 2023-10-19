@@ -4,10 +4,16 @@ import Player from "./components/Player";
 import Right from "./components/Right";
 //gidyai - file structure
 import axios from "axios";
-
-
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  
+  const nav = useNavigate();
+  const username = localStorage.getItem("username");
+  if(!username) {
+    nav("/");
+  }
+
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0); //gidyai - hooks
   const [nextSongIndex, setNextSongIndex] = useState(0);
@@ -15,14 +21,19 @@ function App() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await axios.get("http://localhost:3001/api/songs");
+        const response = await axios.get("http://localhost:3001/api/songs",{
+          params: {
+            user: username,
+          }
+        });
+        console.log(response.data)
         setSongs(response.data);
       } catch (err) {
         console.log(err);
       }
     }
     fetchSongs();
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (songs.length > 0) {

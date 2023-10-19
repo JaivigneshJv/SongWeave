@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./player.css";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Right(props) {
+  const nav = useNavigate();
+  const [uploadToggle, setUploadToggle] = useState(false);
   const [songFile, setSongFile] = useState(null);
 
   const handleSongFileChange = (event) => {
     setSongFile(event.target.files[0]);
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    nav("/");
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("song", songFile);
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/upload",
+        `http://localhost:3001/api/upload?user=${localStorage.getItem(
+          "username"
+        )}`,
         formData,
         {
           headers: {
@@ -36,7 +45,12 @@ function Right(props) {
   return (
     <div className="right_container ">
       <div className="songs_container">
-        <h2>Songs</h2>
+        {props.songs.length === 0 ? (
+          <h2>upload songs to start listening </h2>
+        ) : (
+          <h2>Songs</h2>
+        )}
+
         <ul>
           {props.songs.map((song) => (
             <li key={song._id}>
@@ -49,15 +63,62 @@ function Right(props) {
           ))}
         </ul>
       </div>
-      <div className="upload_container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="song">Song: </label>
-            <input type="file" id="song" onChange={handleSongFileChange} />
-          </div>
-          <button type="submit">Upload</button>
-        </form>
+      {uploadToggle && (
+        <div className="upload_container">
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="song">Song: </label>
+              <input type="file" id="song" onChange={handleSongFileChange} />
+            </div>
+
+            <button type="submit">Upload</button>
+          </form>
+        </div>
+      )}
+      <div className="logout">
+        <button onClick={handleLogout}>Logout</button>
       </div>
+      <div className="upload">
+        <button
+          onClick={() => {
+            setUploadToggle(!uploadToggle);
+          }}
+        >
+          Upload
+        </button>
+      </div>
+      <div className="share">
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(window.location.href);
+            toast.success("Copied to clipboard", {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }}
+        >
+          share
+        </button>
+      </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeButton={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

@@ -456,7 +456,7 @@
 }
 .right_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   color: white;
@@ -465,16 +465,25 @@
   width: 70vw;
 }
 .songs_container{
+  width: 50%;
+  height: 70%;
   text-align: left;
   border: .5px solid white;
   border-radius: 10px;
-  padding: 50px;
+  
 }
+
 .upload_container{
+  
+  margin-left: 40px;
+  height: 60%;
+  margin-top: 160px;
+  width: 20%;
   border: .5px solid white;
   border-radius: 10px;
   padding: 50px;
-  margin-top: 100px;
+  
+  
 }
 
 
@@ -495,17 +504,6 @@ form input[type="file"] {
   margin-bottom: 20px;
 }
 
-form button[type="submit"] {
-  background-color: white;
-  color: black;
-  font-size: 18px;
-  padding: 10px 20px;
-  border: none;
-  border-color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
 audio::-webkit-media-controls-play-button {
   display: none;
@@ -522,5 +520,41 @@ audio{
 .song_info{
   font-size: small;
 }
+.logout{
+  top: 15px;
+  right: 15px;
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  border-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.upload{
 
+  top: 60px;
+  right: 15px;
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  border-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.share{
+  top: 105px;
+  right: 15px;
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  border-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 }

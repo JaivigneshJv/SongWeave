@@ -1,0 +1,35 @@
+.App{
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    height : 99vh;
+}
+
+.App input[type="text"]{
+    width: 300px;
+    height: 30px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white ;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-family: poppins;
+    outline: none; 
+}
+
+.App input[type="text"]::placeholder {
+    color: white;
+    
+}
+.App button {
+    background-color: white;
+    color: black;
+    border: none;
+    width: 100px;
+    height: 34px;
+    padding-bottom: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: poppins;
+}
+

@@ -1,23 +1,27 @@
 const mongoose = require('mongoose');
 
 const songSchema = new mongoose.Schema({
-  title: {
+  user: {
     type: String,
-    required: true,
+
   },
-  img_src: {
-    type: String,
-    required: true,
-  },
-  album: String,
-  src: {
-    type: String,
-    required: true,
-  }
+  songs: [{
+    title: {
+      type: String,
+      
+    },
+    img_src: {
+      type: String,
+      
+    },
+    album: String,
+    src: {
+      type: String,
+      
+    }
+  }]
 });
 
 const Song = mongoose.model('Song', songSchema);
 
 module.exports = Song;
-
-//gidyai
