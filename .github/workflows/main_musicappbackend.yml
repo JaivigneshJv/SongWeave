@@ -15,7 +15,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      
+      - name: Debug Directory Contents
+        run: ls -al ./backend
+        
       - name: Change directory to the backend
         run: cd backend
 
