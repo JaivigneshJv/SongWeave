@@ -16,11 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Debug Directory Contents
-        run: ls -al ./backend
-        
-      - name: Change directory to the backend
-        run: cd backend
+      
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
@@ -29,6 +25,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
+          cd backend
           npm install
           npm run build --if-present
           npm run test --if-present
