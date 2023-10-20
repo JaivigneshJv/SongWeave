@@ -9,6 +9,7 @@ function Right(props) {
   const nav = useNavigate();
   const [uploadToggle, setUploadToggle] = useState(false);
   const [songFile, setSongFile] = useState(null);
+  const [uploading, setuploading] = useState("upload");
 
   const handleSongFileChange = (event) => {
     setSongFile(event.target.files[0]);
@@ -34,9 +35,11 @@ function Right(props) {
           },
         }
       );
-      window.location.reload();
-
-      console.log(response.data);
+      setuploading("uploading");
+      setTimeout(() => {
+        window.location.reload();
+      }, 8000);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -71,12 +74,28 @@ function Right(props) {
               <input type="file" id="song" onChange={handleSongFileChange} />
             </div>
 
-            <button type="submit">Upload</button>
+            <button
+              onClick={() => {
+                toast.success(" uploading! please wait! ", {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
+              }}
+              type="submit"
+            >
+              upload
+            </button>
           </form>
         </div>
       )}
       <div className="logout">
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>createnew</button>
       </div>
       <div className="upload">
         <button
@@ -84,7 +103,7 @@ function Right(props) {
             setUploadToggle(!uploadToggle);
           }}
         >
-          Upload
+          {uploading}
         </button>
       </div>
       <div className="share">

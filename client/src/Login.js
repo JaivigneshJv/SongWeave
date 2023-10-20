@@ -37,12 +37,12 @@ const Login = () => {
       <div className="login_continer">
         <input
           type="text"
-          placeholder="Username"
+          placeholder="enter playlist name"
           value={Username}
           on
           onChange={handleChange}
         />
-        <button onClick={handleSubmit}>Login</button>
+        <button onClick={handleSubmit}>Open</button>
       </div>
     </div>
   );
