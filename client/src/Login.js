@@ -39,7 +39,7 @@ const Login = () => {
       <div className="login_continer">
         <input
           type="text"
-          placeholder="enter playlist name"
+          placeholder="enter playlist name (opens if exists)"
           value={Username}
           on
           onChange={handleChange}

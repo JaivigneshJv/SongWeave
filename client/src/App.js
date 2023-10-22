@@ -5,16 +5,26 @@ import Right from "./components/Right";
 //gidyai - file structure
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 
 function App() {
   
+  const {folder } = useParams();
   const nav = useNavigate();
-  const username = localStorage.getItem("username");
-  if(!username) {
+  if(folder === undefined){
     nav("/");
   }
+  const username = folder;
+
+  // if(username === ""){
+  //   setUsername(localStorage.getItem("username"));
+  //   if(!username) {
+  //     nav("/");
+  //   }
+  // }
+  
 
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0); //gidyai - hooks
