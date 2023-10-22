@@ -27,9 +27,9 @@ function Right(props) {
     formData.append("song", songFile);
   
     try {
-      const link = process.env.REACT_APP_SERVERLINK;
+
       const response = await axios.post(
-        `${link}/api/upload?user=${localStorage.getItem(
+        `https://musicappbackend.azurewebsites.net/api/upload?user=${localStorage.getItem(
           "username"
         )}`,
         formData,

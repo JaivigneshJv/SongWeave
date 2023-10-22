@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(process.env.REACT_APP_SERVERLINK+"/api/newuser", {
+      await axios.post("https://musicappbackend.azurewebsites.net/api/newuser", {
         username: Username,
       });
     } catch (err) {

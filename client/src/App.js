@@ -23,7 +23,7 @@ function App() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await axios.get(process.env.REACT_APP_SERVERLINK+"api/songs",{
+        const response = await axios.get("https://musicappbackend.azurewebsites.net/api/songs",{
           params: {
             user: username,
           }
