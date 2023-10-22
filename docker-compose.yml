@@ -16,6 +16,3 @@ services:
 networks:
   mern-app:
     driver: bridge
-volumes:
-  mongo-data:
-    driver: local
