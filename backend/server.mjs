@@ -232,7 +232,7 @@ app.post("/api/newuser", async (req, res) => {
 });
 
 app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
+  // path must route to lambda
 
 module.exports = app;
 module.exports.handler = serverless(app);
