@@ -1,3 +1,4 @@
+'use strict';
 import express from "express";
 import mongoose from "mongoose";
 import Song from "./models/Song.js";
@@ -5,6 +6,7 @@ import { parseFile } from "music-metadata";
 import { inspect } from "util";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
+import bodyParser from "body-parser";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -229,7 +231,8 @@ app.post("/api/newuser", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  //gidyai
-  console.log(`Server is running on port ${PORT}`);
-});
+app.use(bodyParser.json());
+app.use('/.netlify/functions/server', router);  // path must route to lambda
+
+module.exports = app;
+module.exports.handler = serverless(app);
