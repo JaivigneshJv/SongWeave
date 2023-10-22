@@ -42,10 +42,11 @@ function App() {
         setSongs(response.data);
       } catch (err) {
         console.log(err);
+        nav("/notfound")
       }
     }
     fetchSongs();
-  }, [username]);
+  }, [username, nav]);
 
   useEffect(() => {
     if (songs.length > 0) {

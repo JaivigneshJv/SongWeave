@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./Login";
+import Notfound from "./components/Notfound";
 
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/:folder",
     element: <App />,
+  },
+  {
+    path: "/notfound",
+    element: <Notfound />,
   },
 ]);
 
