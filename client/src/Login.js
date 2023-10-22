@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+
 const Login = () => {
   const nav = useNavigate();
   useEffect(() => {
@@ -23,7 +25,7 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("http://localhost:3001/api/newuser", {
+      await axios.post(process.env.REACT_APP_SERVERLINK+"/api/newuser", {
         username: Username,
       });
     } catch (err) {

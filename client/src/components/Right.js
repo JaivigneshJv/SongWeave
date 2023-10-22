@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
+
 function Right(props) {
   const nav = useNavigate();
   const [uploadToggle, setUploadToggle] = useState(false);
@@ -22,10 +25,11 @@ function Right(props) {
     event.preventDefault();
     const formData = new FormData();
     formData.append("song", songFile);
-
+  
     try {
+      const link = process.env.REACT_APP_SERVERLINK;
       const response = await axios.post(
-        `http://localhost:3001/api/upload?user=${localStorage.getItem(
+        `${link}/api/upload?user=${localStorage.getItem(
           "username"
         )}`,
         formData,

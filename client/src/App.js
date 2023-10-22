@@ -6,6 +6,8 @@ import Right from "./components/Right";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
+
 function App() {
   
   const nav = useNavigate();
@@ -21,7 +23,7 @@ function App() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await axios.get("http://localhost:3001/api/songs",{
+        const response = await axios.get(process.env.REACT_APP_SERVERLINK+"api/songs",{
           params: {
             user: username,
           }
