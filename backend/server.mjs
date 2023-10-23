@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 
 import { v2 as cloudinary } from "cloudinary";
+import { send } from "process";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDNAME,
@@ -29,7 +30,7 @@ cloudinary.config({
 
 try {
   //gidyai
-  mongoose.connect(process.env.MONGOURL , {
+  mongoose.connect(process.env.MONGOURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -224,6 +225,25 @@ app.post("/api/newuser", async (req, res) => {
     }
   } catch (err) {
     console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
+app.post("/api/delete", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const song = await Song.findOneAndUpdate(
+      { "songs._id": id },
+      { $pull: { songs: { _id: id } } },
+      { new: true }
+    );
+    if (!song) {
+      res.status(400).send("Song not found");
+    } else {
+      res.status(200).send("Song deleted successfully");
+    }
+  } catch (err) {
+    console.log(err);
     res.status(500).send("Server error");
   }
 });

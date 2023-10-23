@@ -5,14 +5,25 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
-
 function Right(props) {
   const nav = useNavigate();
   const [uploadToggle, setUploadToggle] = useState(false);
   const [songFile, setSongFile] = useState(null);
   const [uploading, setuploading] = useState("upload");
+
+  const handleDelete = async (id) => {
+    try {
+      const response = axios.post("https://musicappbackend.azurewebsites.net/api/delete", {
+        id: id,
+      });
+      console.log(response);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleSongFileChange = (event) => {
     setSongFile(event.target.files[0]);
@@ -25,9 +36,8 @@ function Right(props) {
     event.preventDefault();
     const formData = new FormData();
     formData.append("song", songFile);
-  
-    try {
 
+    try {
       const response = await axios.post(
         `https://musicappbackend.azurewebsites.net/api/upload?user=${localStorage.getItem(
           "username"
@@ -64,6 +74,9 @@ function Right(props) {
               <div className="song_item">
                 <div className="song_info">
                   <h3>{song.title}</h3>
+                </div>
+                <div className="song_actions">
+                  <button onClick={() => handleDelete(song._id)}>Delete</button>
                 </div>
               </div>
             </li>

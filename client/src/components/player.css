@@ -516,9 +516,16 @@ audio::-webkit-media-controls-pause-button {
 audio{
   background-color: black;
 }
-
+.song_item{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
 .song_info{
   font-size: small;
+}
+.song_actions button{
+  border-radius: 15px;
 }
 .logout{
   top: 15px;
