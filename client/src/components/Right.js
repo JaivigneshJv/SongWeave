@@ -13,7 +13,7 @@ function Right(props) {
 
   const handleDelete = async (id) => {
     try {
-      const response = axios.post("https://musicappbackend.azurewebsites.net/api/delete", {
+      const response = axios.post("http://localhost:3001/api/delete", {
         id: id,
       });
       console.log(response);
@@ -33,13 +33,13 @@ function Right(props) {
     nav("/");
   };
   const handleSubmit = async (event) => {
+    console.log("submitting");
     event.preventDefault();
     const formData = new FormData();
     formData.append("song", songFile);
-
     try {
       const response = await axios.post(
-        `https://musicappbackend.azurewebsites.net/api/upload?user=${localStorage.getItem(
+        `http://localhost:3001/api/upload?user=${localStorage.getItem(
           "username"
         )}`,
         formData,

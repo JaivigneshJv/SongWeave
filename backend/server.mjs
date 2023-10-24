@@ -114,17 +114,18 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
         fs.writeFileSync("./assets/" + pictureFileName, pictureData);
         let cloudpicture;
         let cloudsong;
-
+        
         cloudinary.uploader.upload(
           pictureFilePath,
           { resource_type: "image", public_id: pictureFileName },
           function (error, result) {
             const cloudpicture = result.secure_url;
-
+            
             cloudinary.uploader.upload(
               filePath,
               { resource_type: "auto", public_id: path.basename(filePath) },
               function (error, result) {
+                
                 const cloudsong = result.secure_url;
 
                 const filter = { user: user };
@@ -135,14 +136,13 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
                   src: cloudsong,
                   user: user,
                 };
-
+                
                 Song.findOneAndUpdate(
                   filter,
                   { $push: { songs: song } },
                   { new: true }
                 )
-                  .then((updatedSong) => {
-                    console.log(updatedSong);
+                  .then(() => {
                     fs.unlinkSync(filePath);
                     fs.unlinkSync(pictureFilePath);
                   })
@@ -153,18 +153,6 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
             );
           }
         );
-
-        // fs.unlinkSync(filePath);
-        // fs.unlinkSync(pictureFilePath);
-
-        // console.log(inspect(metadata, { showHidden: false, depth: null }));
-        // console.log(metadata.common.title);
-        // console.log(metadata.common.artist);
-        // console.log(metadata.common.picture[0].data);
-
-        // console.log("../../backend/" + path.dirname(pictureFilePath) + "/" + pictureFileName)
-        // console.log("../../backend/" + filePath)
-        // console.log()
       } catch (error) {
         console.error(error.message);
       }
@@ -174,44 +162,8 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
-// (async () => {
-//     try {
-//       const metadata = await parseFile('../client/public/songs/Eeriye-MassTamilan.dev.mp3');
-//       console.log(inspect(metadata, { showHidden: false, depth: null }));
-//       console.log(metadata.common.title);
-//       console.log(metadata.common.artist);
-//       console.log(metadata.common.picture[0].data);
-
-//     } catch (error) {
-//       console.error(error.message);
-//     }
-//   })();
 app.post("/api/newuser", async (req, res) => {
-  // try {
-  //   const { username } = req.body;
-  //   const path = "/Users/Neko/Developer/MediaPlayerMERN/client/public/users";
-  //   fs.mkdir(path + "/" + username, { recursive: true }, (err) => {
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //     console.log("Directory created successfully!");
-  //   });
-  //   fs.mkdir(path + "/" + username + "/songs", { recursive: true }, (err) => {
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //     console.log("Directory created successfully!");
-  //   });
-  //   fs.mkdir(path + "/" + username + "/images", { recursive: true }, (err) => {
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //     console.log("Directory created successfully!");
-  //   });
-  // } catch (err) {
-  //   res.status(400).json({ message: err.message });
-  // }
+  
 
   try {
     const { username } = req.body;
