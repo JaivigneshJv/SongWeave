@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     async function fetchSongs() {
       try {
-        const response = await axios.get("http://localhost:3001/api/songs",{
+        const response = await axios.get("https://musicappbackend.azurewebsites.net/api/songs",{
           params: {
             user: username,
           }
