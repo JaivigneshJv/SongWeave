@@ -20,7 +20,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 
 import { v2 as cloudinary } from "cloudinary";
-import { send } from "process";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDNAME,
