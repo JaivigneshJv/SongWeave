@@ -9,7 +9,7 @@ const Songs = (props) => {
     try {
       await axios
         .post(
-          `http://localhost:3001/api/searchsongupload?user=${localStorage.getItem(
+          `https://musicappbackend.azurewebsites.net/api/searchsongupload?user=${localStorage.getItem(
             "username"
           )}`,
           {

@@ -18,7 +18,7 @@ function Right(props) {
     console.log(searchValue);
     try {
       axios
-        .post("http://localhost:3001/api/searchforsongs", {
+        .post("https://musicappbackend.azurewebsites.net/api/searchforsongs", {
           search: searchValue,
         })
         .then((res) => {
