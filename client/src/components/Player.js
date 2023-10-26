@@ -57,7 +57,7 @@ const Player = (props) => {
         src={props.songs[props.currentSongIndex].src}
         ref={audioEl}
         controls
-        controlsList="nodownload "
+        // controlsList="nodownload "
       ></audio>
       {/* gidyai - audio tag */}
 
