@@ -6,18 +6,28 @@ import { inspect } from "util";
 import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
 import dotenv from "dotenv";
-dotenv.config();
-
-//gidyai
 import multer from "multer";
 import path from "path";
 import * as fs from "fs";
+dotenv.config();
+import { Downloader } from 'ytdl-mp3';
+import YouTube from "youtube-sr";
+
+
+const downloader = new Downloader({
+  outputDir: "./assets",
+  getTags: true,
+});
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 //nodemon gidyai
 
 app.use(cors());
+app.use(express.json());
+
+
 
 import { v2 as cloudinary } from "cloudinary";
 
@@ -38,7 +48,6 @@ try {
   console.log(err);
 }
 
-app.use(express.json());
 
 //for my purpose - ignore
 app.post("/api/uploadsongs", async (req, res) => {
@@ -64,6 +73,7 @@ app.post("/api/uploadsongs", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 
 //send all the songs to client
 
@@ -98,6 +108,8 @@ const upload = multer({
   },
 });
 
+
+//Upload songs
 app.post("/api/upload", upload.single("song"), (req, res) => {
   try {
     const { path: filePath } = req.file;
@@ -161,10 +173,13 @@ app.post("/api/upload", upload.single("song"), (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-app.post("/api/newuser", async (req, res) => {
-  
 
-  try {
+
+
+//New Userr
+
+app.post("/api/newuser", async (req, res) => {
+    try {
     const { username } = req.body;
     const existingUser = await Song.findOne({ user: username });
     if (existingUser) {
@@ -179,6 +194,9 @@ app.post("/api/newuser", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+
+//Delete song
 
 app.post("/api/delete", async (req, res) => {
   try {
@@ -197,6 +215,104 @@ app.post("/api/delete", async (req, res) => {
     console.log(err);
     res.status(500).send("Server error");
   }
+});
+
+app.post("/api/searchupload", async (req, res) => {
+  const { search } = req.body;
+  const videos = await YouTube.search(search, { limit: 1 });
+  const downloader = new Downloader({
+    outputDir: "./assets",
+    getTags: true,
+});
+await downloader.downloadSong(videos[0].url);
+
+
+
+})
+
+app.post("/api/searchforsongs", async (req, res) => {
+  const {search} = req.body;
+  console.log(search)
+  const videos = await YouTube.search(search, { limit: 3 });
+  res.status(200).json(videos);
+});
+
+app.post("/api/searchsongupload", async (req, res) => {
+  const {url} = req.body;
+  const user = req.query.user;
+  (async () => {
+    try {
+      let filepath_search = "";
+      try {
+         filepath_search = await downloader.downloadSong(url);
+        // rest of the code
+      } catch (error) {
+        console.error(error.message);
+        fs.readdir("assets", (err, files) => {
+          if (err) throw err;
+          for (const file of files) {
+            fs.unlink(path.join("assets", file), (err) => {
+              if (err) throw err;
+            });
+          }
+        });
+      }
+      const metadata = await parseFile(filepath_search);
+      const pictureData = metadata.common.picture[0].data;
+      const pictureFileName = uuidv4() + ".jpg";
+      const pictureFilePath = "./assets/" + pictureFileName;
+
+      fs.writeFileSync("./assets/" + pictureFileName, pictureData);
+
+      let cloudpicture;
+      let cloudsong;
+      
+      cloudinary.uploader.upload(
+        pictureFilePath,
+        { resource_type: "image", public_id: pictureFileName },
+        function (error, result) {
+          const cloudpicture = result.secure_url;
+          
+          cloudinary.uploader.upload(
+            filepath_search,
+            { resource_type: "auto", public_id: path.basename(filepath_search) },
+            function (error, result) {
+              
+              const cloudsong = result.secure_url;
+
+              const filter = { user: user };
+              const song = {
+                title: metadata.common.title,
+                img_src: cloudpicture,
+                album: metadata.common.album,
+                src: cloudsong,
+                user: user,
+              };
+              
+              Song.findOneAndUpdate(
+                filter,
+                { $push: { songs: song } },
+                { new: true }
+              )
+                .then(() => {
+                  fs.unlinkSync(filepath_search);
+                  fs.unlinkSync(pictureFilePath);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  fs.unlinkSync(filepath_search);
+                });
+            }
+          );
+        }
+      );
+      res.status(201).json({ message: "File uploaded successfully" });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Can't get data! Try again");
+    }
+  })();
+  
 });
 
 app.listen(PORT, () => {

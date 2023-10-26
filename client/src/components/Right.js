@@ -4,22 +4,45 @@ import "./player.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Songs from "./Songs";
 
 function Right(props) {
   const nav = useNavigate();
   const [uploadToggle, setUploadToggle] = useState(false);
   const [songFile, setSongFile] = useState(null);
   const [uploading, setuploading] = useState("upload");
+  const [searchValue, setSearchValue] = useState("");
+  const [songs, setSongs] = useState([]);
+  const [local, setLocal] = useState(false);
+  const handleSubmitSearch = (async) => {
+    console.log(searchValue);
+    try {
+      axios
+        .post("http://localhost:3001/api/searchforsongs", {
+          search: searchValue,
+        })
+        .then((res) => {
+          setSongs(res.data);
+          console.log(res);
+          console.log(songs);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
-      const response = axios.post("https://musicappbackend.azurewebsites.net/delete", {
-        id: id,
-      });
-      console.log(response);
+      const response = axios.post(
+        "https://musicappbackend.azurewebsites.net/api/delete",
+        {
+          id: id,
+        }
+      );
       setTimeout(() => {
         window.location.reload();
       }, 2000);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -85,29 +108,65 @@ function Right(props) {
       </div>
       {uploadToggle && (
         <div className="upload_container">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="song">Song: </label>
-              <input type="file" id="song" onChange={handleSongFileChange} />
-            </div>
+          {local ? (
+            <div className="uploadfromlocal">
+              <form onSubmit={handleSubmit}>
+                <div>
+                  {/* <label htmlFor="song">Song: </label> */}
+                  <input
+                    type="file"
+                    id="song"
+                    onChange={handleSongFileChange}
+                  />
+                </div>
 
-            <button
-              onClick={() => {
-                toast.success(" uploading! please wait! ", {
-                  position: "bottom-right",
-                  autoClose: 5000,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "light",
-                });
+                <button
+                  onClick={() => {
+                    toast.success(" uploading! please wait! ", {
+                      position: "bottom-right",
+                      autoClose: 5000,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                  }}
+                  type="submit"
+                >
+                  upload
+                </button>
+              </form>
+            </div>
+          ) : null}
+          <div className="upload_login_continer">
+            <input
+              style={{
+                width: "100%",
               }}
-              type="submit"
+              type="text"
+              placeholder="song name"
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+            <button onClick={handleSubmitSearch}>Search</button>
+            <button
+              style={{
+                position: "relative",
+                left: "10px",
+              }}
+              onClick={() => {
+                setLocal(!local);
+              }}
             >
-              upload
+              Local
             </button>
-          </form>
+          </div>
+          <div className="searched_songs">
+            <Songs songs={songs} />
+          </div>
         </div>
       )}
       <div className="logout">

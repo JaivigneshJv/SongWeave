@@ -23,6 +23,8 @@
     "music-metadata": "^8.1.4",
     "nodemon": "^3.0.1",
     "path": "^0.12.7",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "youtube-sr": "^4.3.9",
+    "ytdl-mp3": "^3.4.1"
   }
 }
