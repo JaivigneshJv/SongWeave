@@ -1,10 +1,8 @@
 import React from "react";
 import "./login.css";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
-
-
 
 const Login = () => {
   const nav = useNavigate();
@@ -25,9 +23,12 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("https://musicappbackend.azurewebsites.net/api/newuser", {
-        username: Username,
-      });
+      await axios.post(
+        "https://musicappbackend.azurewebsites.net/api/newuser",
+        {
+          username: Username,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +40,7 @@ const Login = () => {
       <div className="login_continer">
         <input
           type="text"
-          placeholder="enter playlist name (opens if exists) - on dev branch"
+          placeholder="enter playlist name (opens if exists) - on prod branch"
           value={Username}
           on
           onChange={handleChange}
